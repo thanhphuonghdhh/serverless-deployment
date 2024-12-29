@@ -24,13 +24,15 @@ export function Todos() {
 
     return renderTodosList()
   }
-
+  
   function renderTodosList() {
     return (
       <Grid padded>
-        {todos.map((todo, pos) => {
+        {todos?.map((todo, pos) => {
+          if (todo)
           return (
             <Grid.Row key={todo.todoId}>
+              {todo.todoId}
               <Grid.Column width={1} verticalAlign="middle">
                 <Checkbox
                   onChange={() => onTodoCheck(pos)}
@@ -83,6 +85,8 @@ export function Todos() {
       await deleteTodo(accessToken, todoId)
       setTodos(todos.filter((todo) => todo.todoId !== todoId))
     } catch (e) {
+      console.log(e);
+      
       alert('Todo deletion failed')
     }
   }
